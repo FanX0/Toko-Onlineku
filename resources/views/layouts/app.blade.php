@@ -30,7 +30,7 @@
     {{-- Script --}}
     @stack('prepend-script')
     @include('includes.script')
-    @method('addon-script')
+    @stack('addon-script')
 
 </body>
 
