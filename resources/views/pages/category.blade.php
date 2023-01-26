@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
-@section('title')index.html
+@section('title')
 Store Homepage
 @endsection
 
 @section('content')
+<!-- Page Content -->
 <div class="page-content page-home">
     <section class="store-carousel">
         <div class="container">
@@ -95,7 +96,7 @@ Store Homepage
         <div class="row">
             <div class="container">
                 <div class="col-12" data-aos="fade-up">
-                    <h5>New Products</h5>
+                    <h5>All Products</h5>
                 </div>
 
                 <div class="row">
@@ -184,4 +185,5 @@ Store Homepage
         </div>
     </section>
 </div>
+
 @endsection
