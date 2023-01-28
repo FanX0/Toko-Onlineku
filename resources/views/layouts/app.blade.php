@@ -12,7 +12,7 @@
     {{-- Style --}}
     @stack('prepend-style')
     @include('includes.style')
-    @method('addon-style')
+    @stack('addon-style')
 
 </head>
 
