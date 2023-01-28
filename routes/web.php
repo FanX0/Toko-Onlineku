@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\DashboardTransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +36,13 @@ Route::get('/register/success', [RegisteredUserController::class, 'success'])->n
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
 Route::get('/dashboard/products/create', [DashboardProductController::class, 'create'])->name('dashboard-product-create');
 Route::get('/dashboard/products', [DashboardProductController::class, 'index'])->name('dashboard-product-details');
 Route::get('/dashboard/products/{id}', [DashboardProductController::class, 'details'])->name('dashboard-product-details');
+Route::get('/dashboard/transactions', [DashboardTransactionController::class, 'index'])->name('dashboard-product-transaction');
+
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
