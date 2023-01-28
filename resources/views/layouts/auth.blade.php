@@ -12,14 +12,14 @@
     {{-- Style --}}
     @stack('prepend-style')
     @include('includes.style')
-    @stack('addon-style')
+    @method('addon-style')
 
 </head>
 
 <body>
 
     {{-- Navbar --}}
-    @include('includes.navbar')
+    @include('includes.navbar-auth')
 
     <!-- Page Content -->
     @yield('content')
