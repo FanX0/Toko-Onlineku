@@ -48,4 +48,8 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    public function success(){
+        return view ('auth.success');
+    }
 }
