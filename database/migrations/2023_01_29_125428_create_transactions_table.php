@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('inscurances_price');
             $table->integer('shipping_price');
             $table->integer('total_price');
-            $table->string('transaction_status');
+            $table->string('transaction_status'); //UNPAID/PENDING/SUCCESS/FAILED
             $table->string('resi');
 
 
