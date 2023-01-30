@@ -11,6 +11,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\DashboardSettingController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,17 @@ Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::clas
 
 Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])->name('dashboard-product-transaction-store');
 Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-product-transaction-account');
+
+Route::prefix('admin')
+    ->namespace('Admin')
+ //   ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('admin-dashboard');
+        // Route::resource('product', ProductController::class);
+        // Route::resource('product-gallery', ProductGalleryController::class);
+        // Route::resource('transaction', TransactionController::class);
+    });
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
