@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Product;
+use App\Models\User;
+use App\Models\Category;
 
 use App\Http\Requests\Admin\ProductRequest;
 
@@ -65,7 +67,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.product.create');
+        $users = User::all();
+        $categories = Category::all();
+
+        return view('pages.admin.product.create',[
+            'users' => $users,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -77,6 +85,8 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
+
+        $data['slug'] = Str::slug($request->name);
 
         $data['password'] = bcrypt($request->password);
 
