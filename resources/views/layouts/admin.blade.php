@@ -30,9 +30,10 @@
                     <a href="#" class="list-group-item list-group-item-action">Products</a>
                     <a href="{{
                         route('category.index') }}"
-                        class="list-group-item list-group-item-action {{ (request()->is('admin/categories*')) ? 'active': '' }}">Category</a>
+                        class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active': '' }}">Category</a>
                     <a href="#" class="list-group-item list-group-item-action">Transactions</a>
-                    <a href="#" class="list-group-item list-group-item-action">Users</a>
+                    <a href="{{ route ('user.index') }}"
+                        class="list-group-item list-group-item-action {{ (request()->is('admin/user*')) ? 'active': '' }}">Users</a>
                     <a href="/index.html" class="list-group-item list-group-item-action">Signout</a>
                 </div>
             </div>
