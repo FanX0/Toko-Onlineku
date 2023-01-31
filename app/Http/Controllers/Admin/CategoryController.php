@@ -37,7 +37,7 @@ class CategoryController extends Controller
                                 <button type="submit" class="dropdown-item text-danger">
                                     Delete
                                 </button>
-                           div class="dropdown-menu">
+                           <div class="dropdown-menu">
                            <a class="dropdown-item" href="'.route('category.edit',$item->id).'">Edit</a>
 
                                <form action="'.route('category.destroy',$item->id).'" method="POST">
