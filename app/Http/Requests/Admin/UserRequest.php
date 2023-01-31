@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
         'name'=> 'required|string|max:255',
         'email'=> 'required|email|unique:users,email',
         'roles'=> 'nullable|string|in:ADMIN,USER',
-        'password'=> 'required|string|min:5|confirmed',
+        'password'=> 'required|string|min:8|confirmed',
         'Address_one'=> 'required|string|max:255',
         'Address_two'=> 'required|string|max:255',
         'provinces_id'=> 'required|integer|exists:provinces,id',
