@@ -14,6 +14,8 @@ use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ProductGalleryController as AdminProductGalleryController;
 
 
 /*
@@ -60,6 +62,8 @@ Route::prefix('admin')
         Route::get('/', [AdminDashboardController::class, 'index'])->name('admin-dashboard');
         Route::resource('category', AdminCategoryController::class);
         Route::resource('user', AdminUserController::class);
+        Route::resource('product', AdminProductController::class);
+        Route::resource('product-gallery', AdminProductGalleryController::class);
         
         
     });
