@@ -57,10 +57,12 @@ User
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col text-right">
-                                    <button type="submit" class="btn btn-success px-5">
-                                        Save Now
-                                    </button>
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <button type="submit" class="btn btn-success px-5">
+                                            Save Now
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
