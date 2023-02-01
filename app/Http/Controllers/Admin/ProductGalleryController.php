@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Product;
-use App\Models\User;
+use App\Models\ProductGallery;
 
 use App\Http\Requests\Admin\ProductGalleryRequest;
 
@@ -55,7 +55,7 @@ class ProductGalleryController extends Controller
                     </div>';
                 })
                 ->editColumn('photos', function ($item) {
-                    return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 40px;" />' : '';
+                    return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 80px;" />' : '';
                 })
                 ->rawColumns(['action', 'photos'])
                 ->make();
@@ -71,12 +71,11 @@ class ProductGalleryController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $categories = Category::all();
+
+        $products = Product::all();
 
         return view('pages.admin.product-gallery.create',[
-            'users' => $users,
-            'categories' => $categories
+            'products' => $products
         ]);
     }
 
@@ -86,17 +85,17 @@ class ProductGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(ProductGalleryRequest $request)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
+        $data['photos'] = $request->file('photos')->store(
+            'assets/product', 'public'
+        );
 
-        $data['password'] = bcrypt($request->password);
+        ProductGallery::create($data);
 
-        Product::create($data);
-
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
     }
 
     /**
@@ -118,15 +117,7 @@ class ProductGalleryController extends Controller
      */
     public function edit($id)
     {
-        $item = Product::findOrFail($id);
-        $users = User::all();
-        $categories = Category::all();
-
-        return view('pages.admin.product-gallery.edit',[
-            'item' => $item,
-            'users' => $users,
-            'categories' => $categories
-        ]);
+       //
     }
 
     /**
@@ -136,17 +127,9 @@ class ProductGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductGalleryRequest $request, $id)
     {
-        $data = $request->all();
-
-        $item = Product::findOrFail($id);
-
-        $data['slug'] = Str::slug($request->name);
-
-        $item->update($data);
-       
-        return redirect()->route('product.index');
+       //
     }
 
     /**
@@ -157,10 +140,10 @@ class ProductGalleryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Product::findorFail($id);
+        $item = ProductGallery::findorFail($id);
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
 
     }
 }

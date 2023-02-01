@@ -9,7 +9,7 @@ Product Gallery
 <div class="section-content section-dashboard-home" data-aos="fade-up">
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Product</h2>
+            <h2 class="dashboard-title">Product Gallery</h2>
             <p class="dashboard-subtitle">List Gallery</p>
         </div>
         <div class="dashboard-content">

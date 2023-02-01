@@ -9,7 +9,7 @@ Product Gellery
 <div class="section-content section-dashboard-home" data-aos="fade-up">
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Product</h2>
+            <h2 class="dashboard-title">Product Gallery</h2>
             <p class="dashboard-subtitle">Create New Product</p>
         </div>
         <div class="dashboard-content">
@@ -26,45 +26,25 @@ Product Gellery
                     @endif
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('product-gallery.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Nama Product</label>
-                                            <input type="text" class="form-control" name="name" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Pemilik Product</label>
-                                            <select name="users_id" class="form-control">
-                                                @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <label>Product</label>
+                                            <select name="products_id" class="form-control">
+                                                @foreach ($products as $product)
+                                                <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Kategori Product</label>
-                                            <select name="categories_id" class="form-control">
-                                                @foreach ($categories as $categories)
-                                                <option value="{{ $categories->id }}">{{ $categories->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Harga</label>
-                                            <input type="number" class="form-control" name="price" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Deskripsi</label>
-                                            <textarea name="description" id="editor"></textarea>
+                                            <label>Foto Product</label>
+                                            <input type="file" class="form-control" name="photos" required />
                                         </div>
                                     </div>
                                 </div>
@@ -85,17 +65,3 @@ Product Gellery
 </div>
 
 @endsection
-
-@push('addon-script')
-<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-                console.log( editor );
-        } )
-        .catch( error => {
-                console.error( error );
-        } );
-</script>
-@endpush
