@@ -64,86 +64,30 @@ Store Homepage
                 </div>
 
                 <div class="row">
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                        <a href="/details.html" class="component-products d-block">
+                    @php $incrementProduct = 0 @endphp
+                    @forelse ($products as $product)
+                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+                        data-aos-delay="{{ $incrementProduct+=100 }}">
+                        <a href="{{ route('detail', $product->slug) }}" class="component-products d-block">
                             <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-1.jpg')">
+                                <div class="products-image" style="
+                                    @if($product->galleries->count())
+                                        background-image: url('{{ Storage::url($product->galleries->first()->photos) }}')
+                                    @else
+                                        background-color: #eee
+                                    @endif
+                                    ">
                                 </div>
                             </div>
-                            <div class="products-text">Apple Wacth 4</div>
-                            <div class="products-price">$890</div>
+                            <div class="products-text">{{ $product->name }}</div>
+                            <div class="products-price">${{ $product->price }}</div>
                         </a>
                     </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-2.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Orange Bogotta</div>
-                            <div class="products-price">$89440</div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-3.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Sofa Ternyaman</div>
-                            <div class="products-price">$1890</div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-4.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Bubuk Melati</div>
-                            <div class="products-price">$890</div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="500">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-5.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Tatakan</div>
-                            <div class="products-price">$8290</div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-6.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Mavic</div>
-                            <div class="products-price">$8290</div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="700">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-7.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Nike Shoes</div>
-                            <div class="products-price">$2890</div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="800">
-                        <a href="/details.html" class="component-products d-block">
-                            <div class="products-thumbnail">
-                                <div class="products-image" style="background-image: url('/images/product-8.jpg')">
-                                </div>
-                            </div>
-                            <div class="products-text">Monkey kings</div>
-                            <div class="products-price">$2890</div>
-                        </a>
-                    </div>
+                    @empty
+                    <div class="col-12 text-center py-5" data-aos="fade-up" data-aos-delay="100">No Products Found</div>
+                    @endforelse
+
+
                 </div>
             </div>
         </div>
