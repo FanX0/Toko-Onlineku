@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Category;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,11 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $categories = Category::all();
+        return view('auth.register',
+        [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -34,12 +39,21 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'store_name' => ['nullable', 'string', 'max:255'],
+            'categories_id' => ['nullable', 'integer', 'exists:categories,id'],
+            'is_store_open' => ['nullable'],
+
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'store_name' => isset($data['store_name']) ? $data['store_name'] : '',
+            'categories_id' => isset($data['categories_id']) ? $data['categories_id'] : null,
+            'store_status' => isset($data['is_store_open']) ? 1 : 0,
+            'roles' => 'USER',
+
         ]);
 
         event(new Registered($user));
