@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -65,5 +66,18 @@ class RegisteredUserController extends Controller
 
     public function success(){
         return view ('auth.success');
+    }
+
+    public function check (Request $request){
+        $data = $request->all();
+        $user = User::where('email', $data['email'])->first();
+        if($user){
+            $isAvailable = false;
+        }else{
+            $isAvailable = true;
+        }
+        return response()->json([
+            'valid' => $isAvailable
+        ]);
     }
 }
