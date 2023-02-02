@@ -38,7 +38,7 @@ Route::get('/categories/{id}', [CategoryController::class, 'detail'])->name('cat
 
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
 
-Route::get('/cart', [CartController::class, 'index'])->name('detail');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/success', [CartController::class, 'success'])->name('success');
 
 Route::get('/register/success', [RegisteredUserController::class, 'success'])->name('register-success');
