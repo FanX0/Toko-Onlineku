@@ -23,8 +23,12 @@
                         <!-- Email Address -->
                         <div class="form-group">
                             <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" v-model="email" type="email" name="email"
-                                :value="old('email')" required />
+                            <input v-model="email" @change="checkForEmailAvailability()"
+                                class="form-control block mt-1 w-full" :class="{ 'is-invalid': this.email_unavailable }"
+                                id="email">
+
+
+
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         <!-- Password -->
@@ -80,7 +84,7 @@
                             </x-select>
                         </div>
                         <div>
-                            <button class="btn btn-success btn-block mt-4">
+                            <button class="btn btn-success btn-block mt-4" :disabled="this.email_unavailable">
                                 {{ __('Register') }}
                             </button>
                             <a href="{{ route('login') }}" class="btn btn-signup btn-block mt-4">Back to Sign In</a>
@@ -99,6 +103,7 @@
 <script src="/vendor/vue/vue.js"></script>
 <!-- Memunculkan pop-up error -->
 <script src="https://unpkg.com/vue-toasted"></script>
+`<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>`
 <script>
     Vue.use(Toasted);
 
@@ -115,12 +120,53 @@
         //     }
         //   );
         },
-        data: {
-          name: "Farid Azhari",
-          email: "farid123@gmail.com",
-          password: "",
-          is_store_open: true,
-          store_name: "",
+
+        methods: {
+            checkForEmailAvailability: function() {
+                var self = this;
+                axios.get('{{ route('api-register-check') }}', {
+                    params: {
+                        email: this.email
+                    }
+                })
+                .then(function (response) {
+                    if (response.data == 'Available') {
+                        self.$toasted.show(
+                            "Email tersedia! Silahkan lanjutkan ke tahap berikutnya.",
+                            {
+                                position: "top-center",
+                                className: "rounded",
+                                duration: 1000,
+                            }
+                        );
+                        self.email_unavailable = false;
+                    } else {
+                        self.$toasted.error(
+                            "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
+                            {
+                                position: "top-center",
+                                className: "rounded",
+                                duration: 1000,
+                            }
+                        );
+                        self.email_unavailable = true;
+                    }
+                    // handle success
+                    console.log(response);
+                });
+            }
+        },
+
+        data() {
+            return {
+            name: "farid",
+            email: "farid123@gmail.com",
+            is_store_open: true,
+            store_name: "",
+            email_unavailable: false
+            }
+            
+         
         },
       });
 </script>
