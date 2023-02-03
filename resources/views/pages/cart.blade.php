@@ -37,54 +37,35 @@ Store Cart page
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($carts as $cart )
                             <tr>
                                 <td style="width: 25%">
-                                    <img src="/images/product-c1.jpg" alt="" class="cart-image" />
+                                    @if ($cart->product->galleries)
+                                    <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}" alt=""
+                                        class="cart-image" />
+                                    @endif
                                 </td>
                                 <td style="width: 35%">
-                                    <div class="product-title">Sofa Ternyaman</div>
-                                    <div class="product-subtitle">by Sakura</div>
+                                    <div class="product-title">{{ $cart->product->name }}</div>
+                                    <div class="product-subtitle">{{ $cart->product->user->store_name }}</div>
                                 </td>
                                 <td style="width: 35%">
-                                    <div class="product-title">$80,309</div>
+                                    <div class="product-title">{{ number_format($cart->product->user->price) }}</div>
                                     <div class="product-subtitle">USD</div>
                                 </td>
                                 <td style="width: 20%">
-                                    <a href="#" class="btn btn-remove-cart">Remove</a>
+                                    <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                                        @method("DELETE")
+                                        @csrf
+                                        <button type="submit" class="btn btn-remove-cart">
+                                            Remove
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 25%">
-                                    <img src="/images/product-c2.jpg" alt="" class="cart-image" />
-                                </td>
-                                <td style="width: 35%">
-                                    <div class="product-title">Sofa Ternyaman</div>
-                                    <div class="product-subtitle">by Sakura</div>
-                                </td>
-                                <td style="width: 35%">
-                                    <div class="product-title">$13,492</div>
-                                    <div class="product-subtitle">USD</div>
-                                </td>
-                                <td style="width: 20%">
-                                    <a href="#" class="btn btn-remove-cart">Remove</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 25%">
-                                    <img src="/images/product-c3.jpg" alt="" class="cart-image" />
-                                </td>
-                                <td style="width: 35%">
-                                    <div class="product-title">Sofa Ternyaman</div>
-                                    <div class="product-subtitle">by Sakura</div>
-                                </td>
-                                <td style="width: 35%">
-                                    <div class="product-title">$15.000</div>
-                                    <div class="product-subtitle">USD</div>
-                                </td>
-                                <td style="width: 20%">
-                                    <a href="#" class="btn btn-remove-cart">Remove</a>
-                                </td>
-                            </tr>
+
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
