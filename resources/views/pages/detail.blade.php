@@ -128,6 +128,9 @@ Store Detail Page
     </div>
 </div>
 
+@endsection
+
+@push('addon-script')
 <script src="/vendor/vue/vue.js"></script>
 <script>
     var gallery = new Vue({
@@ -153,9 +156,5 @@ Store Detail Page
         },
       });
 </script>
-
-@endsection
-
-@push('addon-script')
 
 @endpush
