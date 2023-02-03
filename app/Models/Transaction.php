@@ -7,5 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    use HasFactory;
+
+     protected $fillable = [
+        'users_id',
+        'insurance_price',
+        'shipping_price',
+        'total_price',
+        'code'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
