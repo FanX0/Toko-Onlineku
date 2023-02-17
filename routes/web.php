@@ -11,11 +11,14 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\DashboardSettingController;
+use App\Http\Controllers\CheckoutController;
+
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductGalleryController as AdminProductGalleryController;
+
 
 
 /*
@@ -42,7 +45,12 @@ Route::post('/details/{id}', [DetailController::class, 'add'])->name('detail-add
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart-delete');
 
+
+
 Route::get('/success', [CartController::class, 'success'])->name('success');
+
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout');
+Route::get('/callback', [CheckoutController::class, 'callback'])->name('midtrans-callback');
 
 Route::get('/register/success', [RegisteredUserController::class, 'success'])->name('register-success');
 
