@@ -55,6 +55,11 @@ class CheckoutController extends Controller
                 'code' => $trx
             ]);
         }
+
+        // Delete cart data
+        Cart::where('users_id', Auth::user()->id)->delete();
+
+
         // konfigurasi midtrans
        // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
