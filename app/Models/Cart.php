@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Product;
+use App\Models\User;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +20,7 @@ class Cart extends Model
     public function product()
     
     {
-        return $this->hashOne(Product::class, 'products_id', 'id');
+         return $this->hasOne(Product::class, 'id', 'products_id');
     }
     // usernya siapa
     public function user()
